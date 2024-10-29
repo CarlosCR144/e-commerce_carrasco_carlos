@@ -144,7 +144,6 @@ const mostrarCards = (a) => {
                     <p class="card-text">Categoria: ${auto.categoria}</p>
                     <p class="card-price">$${auto.precio}</p>
                     <a href="producto.html?prod=${auto.id}" class="btn btn-primary">Ver más</a>
-
                 </div>
             </div>`);
   section.innerHTML = cards.join("");
