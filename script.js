@@ -13,6 +13,7 @@ const autos = [
   descripcion: "Fusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.",
   precio: 15000,
   url: `1`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 2,
@@ -20,6 +21,7 @@ const autos = [
   descripcion: "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.",
   precio: 17000,
   url: `2`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 3,
@@ -27,6 +29,7 @@ const autos = [
   descripcion: "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.",
   precio: 55000,
   url: `3`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 4,
@@ -34,6 +37,7 @@ const autos = [
   descripcion: "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.",
   precio: 19000,
   url: `4`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 5,
@@ -41,6 +45,7 @@ const autos = [
   descripcion: "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
   precio: 25000,
   url: `5`,
+  stock: 18,
   categoria: "Vintage"
 }, {
   id: 6,
@@ -48,6 +53,7 @@ const autos = [
   descripcion: "Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
   precio: 23000,
   url: `6`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 7,
@@ -55,6 +61,7 @@ const autos = [
   descripcion: "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.",
   precio: 19000,
   url: `7`,
+  stock: 18,
   categoria: "Vintage"
 }, {
   id: 8,
@@ -62,6 +69,7 @@ const autos = [
   descripcion: "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
   precio: 41000,
   url: `8`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 9,
@@ -69,6 +77,7 @@ const autos = [
   descripcion: "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
   precio: 24000,
   url: `9`,
+  stock: 18,
   categoria: "Moderno"
 }];
 
@@ -143,6 +152,7 @@ const mostrarCards = (a) => {
                     <p class="card-text">${auto.descripcion.slice(0, 50)}...</p>
                     <p class="card-text">Categoria: ${auto.categoria}</p>
                     <p class="card-price">$${auto.precio}</p>
+                    <b class="card-text">Stock:${auto.stock} </b>
                     <a href="producto.html?prod=${auto.id}" class="btn btn-primary">Ver más</a>
                 </div>
             </div>`);

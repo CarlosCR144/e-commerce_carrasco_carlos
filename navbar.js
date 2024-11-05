@@ -17,7 +17,7 @@ for(item of nav){
 
 
 let navCode =    
-        `<nav class="navbar navbar-expand-lg d-block bg-body-tertiary fixed-top">
+        `<nav class="navbar navbar-expand-lg d-block bg-body-tertiary fixed-top" style="position: relative">
             <div class="container-fluid d-flex">
                 <a class="navbar-brand" href="#">E-COMMERCE</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,12 +27,15 @@ let navCode =
                     <div class="navbar-nav column-gap-2">
                     ${menu.join().replaceAll(",", "")}
                 </div>
-                <div class="navbar-nav ms-auto me-3">
+                <ul class="navbar-nav ms-auto me-3">
                     ${localStorage.getItem("email") ? 
-                        `<span style='cursor: pointer'>${localStorage.getItem("email")}</span> | <span style='cursor: pointer' onclick="logOut()">Cerrar Sesión</span>` 
+                        `<li><span style='cursor: pointer'>${localStorage.getItem("email")}</span></li>
+                        <span>|</span>
+                        <li><a href="cart.html"><img height="25" src="cart.png" alt="Comprar"/><b id="quantity">${localStorage.getItem("quantity")}</b> </a></li>
+                        <span>|</span><li><span style='cursor: pointer' onclick="logOut()">Cerrar Sesión</span></li>` 
                         : `<a href="login.html" class="text-decoration-none">Iniciar Sesión</a>`
                     }
-                </div>
+                </ul>
             </div>
         </nav>`
 header.innerHTML = navCode;
@@ -41,23 +44,4 @@ function logOut(){
     localStorage.clear()
     location.href = "./index.html"
 }
-
-// let botones = [
-//     {texto: "Inicio", href: "index.html"},
-//     {texto: "Contacto", href: "https://youtube.com/@juniorpride?si=0ut_XnT0zsTmxR4b"}
-// ]
-
-// const header = document.querySelector("header");
-
-// let menu = []
-
-// for (let boton of botones) {
-//     if (boton.texto === "Contacto") {
-//         menu.push(`<a class="nav-item" href=${boton.href} target=_blank>${boton.texto}</a>`)
-//     } else {
-//         menu.push(`<a class="nav-item" href=${boton.href}>${boton.texto}</a>`)
-//     }
-// }
-
-// header.innerHTML = menu.join().replaceAll(",", "");
 

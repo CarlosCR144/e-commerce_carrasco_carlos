@@ -9,6 +9,7 @@ const autos = [
   descripcion: "Fusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.",
   precio: 15000,
   url: `1`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 2,
@@ -16,6 +17,7 @@ const autos = [
   descripcion: "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.",
   precio: 17000,
   url: `2`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 3,
@@ -23,6 +25,7 @@ const autos = [
   descripcion: "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.",
   precio: 55000,
   url: `3`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 4,
@@ -30,6 +33,7 @@ const autos = [
   descripcion: "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.",
   precio: 19000,
   url: `4`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 5,
@@ -37,6 +41,7 @@ const autos = [
   descripcion: "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
   precio: 25000,
   url: `5`,
+  stock: 18,
   categoria: "Vintage"
 }, {
   id: 6,
@@ -44,6 +49,7 @@ const autos = [
   descripcion: "Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
   precio: 23000,
   url: `6`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 7,
@@ -51,6 +57,7 @@ const autos = [
   descripcion: "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.",
   precio: 19000,
   url: `7`,
+  stock: 18,
   categoria: "Vintage"
 }, {
   id: 8,
@@ -58,6 +65,7 @@ const autos = [
   descripcion: "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
   precio: 41000,
   url: `8`,
+  stock: 18,
   categoria: "Moderno"
 }, {
   id: 9,
@@ -65,19 +73,13 @@ const autos = [
   descripcion: "Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.",
   precio: 24000,
   url: `9`,
+  stock: 18,
   categoria: "Moderno"
 }];
 
 
 const carFind = autos.find((autos) => autos.id == elemento);
 
-// let etiquetas = `<div class="card m-3">
-//                         <img src="https://66d9ee6caa07a954166f10ed--gregarious-melba-cacdba.netlify.app/${carFind.url}.jpg" class="card-img-top"  alt="Car 1">
-//                         <div class="card-body">
-//                             <h5 class="card-title">${carFind.modelo}</h5>
-//                             <p class="text">${carFind.descripcion}</p>
-//                             <p class="card-price">$${carFind.precio}</p>
-//                         </div>`;
 
 let etiquetas = `<div class="producto-container">
     <div class="producto-main">
@@ -102,36 +104,86 @@ let etiquetas = `<div class="producto-container">
             <div class="shipping-info">
                 <h3>Free Standard International Shipping.</h3>
                 <p>Estimated between Tue, Oct 22 and Wed, Nov 6.</p>
-                <p class="bold">25 available</p>
-                <div class="quantity-selector">
-                    <label for="quantity" class="quantity-label">Quantity:</label>
-                    <select id="quantity" class="quantity-dropdown">
-                        <option value="1">1 unit</option>
-                        <option value="2">2 units</option>
-                        <option value="3">3 units</option>
-                        <option value="4">4 units</option>
-                        <option value="5">5 units</option>
-                        <option value="6">6 units</option>
-                    </select>
-                </div>
+                <b class="bold">Stock: ${carFind.stock}</b>
             
         </div>
     </div>
 
     ${localStorage.getItem("email") ? 
         `
-        <button class="btn primary-btn">Buy it now</button>
-            <button class="btn secondary-btn">Add to cart</button>
         <div class="input-group">
-          <button class="btn btn-outline-secondary" type="button">+</button>
-          <input type="text" class="form-control" placeholder="0" aria-label="Recipient's username with two button addons">
-          <button class="btn btn-outline-secondary" type="button">-</button>
-        </div>` 
+        <button class="btn btn-danger" type="button" onclick="increaseItem()">+</button>
+        <input type="number" class="form-control text-center" value="1">
+        <button class="btn btn-danger" type="button" onclick="decreaseItem()">-</button>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg" onclick="addItems()">Agregar al carrito</button>
+        `
         : 
         `<a href="login.html"><button type="button" class="btn btn-primary btn-lg">Iniciar sesión para comprar</button></a>`
-    }
-</div>`;
-
-
-
+      }
+      </div>;`
+      
 main.innerHTML = etiquetas;
+
+
+const counter = document.querySelector("input")
+
+const increaseItem = () => {
+  const idProduct = Number(window.location.search.split("=")[1]);
+
+  const product = autos.find(car => car.id === idProduct)
+
+  if (product.stock > counter.value) {
+    counter.value = Number(counter.value) + 1
+  }
+}
+
+const decreaseItem = () => {
+  if  (Number(counter.value) > 1){
+    counter.value = Number(counter.value) - 1
+  }
+}
+
+
+const addItems = () => {
+  const add = () => {
+  let cart = JSON.parse(localStorage.getItem("cart"))
+
+  const idProduct = Number(window.location.search.split("=")[1]);
+  const product = autos.find(car => car.id == idProduct)
+  const existeIdEnCart = cart.some(item => item.product.id == idProduct)
+
+  if (existeIdEnCart) {
+    cart = cart.map(item => {
+        if (item.product.id === idProduct) {
+          return {...item, quantity: item.quantity + Number(counter.value)}
+        } else {
+          return item
+        }
+    })
+  } else {
+    cart.push({product: product, quantity: Number(counter.value)})
+  }
+
+  console.log(cart)
+  localStorage.setItem("cart", JSON.stringify(cart))
+  let quantity = cart.reduce((acumulado, actual) => acumulado + actual.quantity, 0)
+  localStorage.setItem("quantity", quantity)
+  const quantityTag = document.querySelector("#quantity")
+  quantityTag.innerText = quantity
+  counter.value = "1"
+
+  Toastify({
+
+    text: "Producto añadido al carrito",
+    duration: 1000
+    
+  }).showToast();
+}
+add()
+  Swal.fire({
+    text: "¿Estás seguro de añadir al carrito?",
+    confirmButtonText: "Sí"
+    })
+  
+}

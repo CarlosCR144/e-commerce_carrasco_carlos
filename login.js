@@ -17,8 +17,10 @@ form.addEventListener("submit", (event) => {
     let pwd = form.elements.password.value
 
     if (sessionAccount.email === email && sessionAccount.password === pwd) {
-        location.href = "./index.html";
         localStorage.setItem("email", email)
+        localStorage.setItem("cart", JSON.stringify([]))
+        localStorage.setItem("quantity", "0")
+        location.href = "./index.html";
     } else {
         form.elements.email.value = ""
         form.elements.password.value = ""

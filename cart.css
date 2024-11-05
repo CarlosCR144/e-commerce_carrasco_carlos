@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+section {
+    flex: 1;
+    width: 100%;
+    margin-top: 5rem;
+}
+
+#cardDiv{
+    width: 100%;
+}
+
+img{
+    height: 170px;
+    width: 320px;
+}
+
+.cartPrice{
+    width: 550px;
+}
