@@ -92,18 +92,16 @@ let etiquetas = `<div class="producto-container">
                 <h1 class="producto-h1">${carFind.modelo}</h1>
                 <p class="description">${carFind.descripcion}</p>
                 <div class="rating">
-                    <span>⭐⭐⭐⭐⭐</span> <a href="#">(3)</a>
+                    <span>⭐⭐⭐⭐⭐</span> <a href="#">(1283)</a>
                 </div>
-                <p class="original-price">${carFind.precio}</p>
-                <p class="discounted-price">$25.000 <span class="discount">(5% OFF)</span></p>
-                <p class="installments">In 6 installments of $673,799.78</p>
+                <p class="original-price">$${carFind.precio}</p>
             </div>
         </div>
 
         <div class="right-section">
             <div class="shipping-info">
-                <h3>Free Standard International Shipping.</h3>
-                <p>Estimated between Tue, Oct 22 and Wed, Nov 6.</p>
+                <h3>Envío gratuito internacional.</h3>
+                <p>Llegada a tu corazón entre Mar, 31 Dic y Vier, 14 Feb.</p>
                 <b class="bold">Stock: ${carFind.stock}</b>
             
         </div>
@@ -111,10 +109,10 @@ let etiquetas = `<div class="producto-container">
 
     ${localStorage.getItem("email") ? 
         `
-        <div class="input-group">
-        <button class="btn btn-danger" type="button" onclick="increaseItem()">+</button>
-        <input type="number" class="form-control text-center" value="1">
-        <button class="btn btn-danger" type="button" onclick="decreaseItem()">-</button>
+        <div class="counter-container">
+        <button class="buttonCounter" onclick="increaseItem()">+</button>
+        <div class="value" id="counterValue">1</div>
+        <button class="buttonCounter" onclick="decreaseItem()">-</button>
         </div>
         <button type="button" class="btn btn-primary btn-lg" onclick="addItems()">Agregar al carrito</button>
         `
@@ -126,64 +124,76 @@ let etiquetas = `<div class="producto-container">
 main.innerHTML = etiquetas;
 
 
-const counter = document.querySelector("input")
+const counter = document.querySelector("#counterValue")
+let quantityProduct = 1
 
 const increaseItem = () => {
   const idProduct = Number(window.location.search.split("=")[1]);
 
   const product = autos.find(car => car.id === idProduct)
 
-  if (product.stock > counter.value) {
-    counter.value = Number(counter.value) + 1
+  if (product.stock > quantityProduct) {
+    quantityProduct += 1
+    counter.innerText = quantityProduct
   }
 }
 
 const decreaseItem = () => {
-  if  (Number(counter.value) > 1){
-    counter.value = Number(counter.value) - 1
+  if  (Number(counter.innerText) > 1){
+    // counter.value = Number(counter.value) - 1
+    quantityProduct -= 1
+    counter.innerText = quantityProduct
   }
 }
 
 
 const addItems = () => {
   const add = () => {
-  let cart = JSON.parse(localStorage.getItem("cart"))
-
-  const idProduct = Number(window.location.search.split("=")[1]);
-  const product = autos.find(car => car.id == idProduct)
-  const existeIdEnCart = cart.some(item => item.product.id == idProduct)
-
-  if (existeIdEnCart) {
-    cart = cart.map(item => {
-        if (item.product.id === idProduct) {
-          return {...item, quantity: item.quantity + Number(counter.value)}
-        } else {
-          return item
-        }
-    })
-  } else {
-    cart.push({product: product, quantity: Number(counter.value)})
-  }
-
-  console.log(cart)
-  localStorage.setItem("cart", JSON.stringify(cart))
-  let quantity = cart.reduce((acumulado, actual) => acumulado + actual.quantity, 0)
-  localStorage.setItem("quantity", quantity)
-  const quantityTag = document.querySelector("#quantity")
-  quantityTag.innerText = quantity
-  counter.value = "1"
-
-  Toastify({
-
-    text: "Producto añadido al carrito",
-    duration: 1000
-    
-  }).showToast();
-}
-add()
-  Swal.fire({
-    text: "¿Estás seguro de añadir al carrito?",
-    confirmButtonText: "Sí"
-    })
+    let cart = JSON.parse(localStorage.getItem("cart"))
   
+    const idProduct = Number(window.location.search.split("=")[1]);
+    const product = autos.find(car => car.id == idProduct)
+    const existeIdEnCart = cart.some(item => item.product.id == idProduct)
+  
+    if (existeIdEnCart) {
+      cart = cart.map(item => {
+          if (item.product.id === idProduct) {
+            return {...item, quantity: item.quantity + quantityProduct}
+          } else {
+            return item
+          }
+      })
+    } else {
+      cart.push({product: product, quantity: quantityProduct})
+    }
+  
+    console.log(cart)
+    localStorage.setItem("cart", JSON.stringify(cart))
+    let quantity = cart.reduce((acumulado, actual) => acumulado + actual.quantity, 0)
+    localStorage.setItem("quantity", quantity)
+    const quantityTag = document.querySelector("#quantity")
+    quantityTag.innerText = quantity
+    counter.innerText = "1"
+  
+    Toastify({
+  
+      text: "Producto añadido al carrito",
+      duration: 1000
+      
+    }).showToast();
+  }
+    Swal.fire({
+      text: "¿Estás seguro/a de añadir al carrito?",
+      confirmButtonText: "Sí",
+      cancelButtonText: "No",
+      showCancelButton: true,
+      showCloseButton: true,
+      confirmButtonColor: "#06f",
+      cancelButtonColor: "#DB5079"
+      }).then(result => {
+        if (result.isConfirmed) {
+          add()
+        }
+      })
+
 }

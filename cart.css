@@ -1,25 +1,115 @@
+/* Estilos generales */
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
     margin: 0;
+    padding: 20px;
 }
 
-section {
+/* Contenedor del carrito */
+.cartProducts {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tarjeta de cada producto */
+.card {
+    display: flex;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 15px;
+    width: 100%;
+}
+
+/* Imagen del producto */
+.card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+/* Información del producto */
+.card-body .flex-grow-1 {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.card-body h5 {
+    font-size: 18px;
+    margin: 0;
+    color: #333333;
+}
+
+/* Detalles de precio, cantidad y total */
+.row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.col-md-4 {
     flex: 1;
-    width: 100%;
-    margin-top: 5rem;
+    text-align: center;
 }
 
-#cardDiv{
-    width: 100%;
+.card-body .text-muted {
+    font-size: 14px;
+    color: #6c757d;
 }
 
-img{
-    height: 170px;
-    width: 320px;
+.card-body h5.mb-0 {
+    font-size: 16px;
+    color: #333333;
 }
 
-.cartPrice{
-    width: 550px;
+/* Botón de eliminar */
+.card-body p[onclick="removeCart"] {
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+.card-body p[onclick="removeCart"]:hover {
+    color: #ff6b6b;
+}
+
+/* Estilo para el total final */
+.finalPrice {
+    text-align: right;
+    font-size: 24px;
+    font-weight: bold;
+    color: #28a745;
+    margin-top: 20px;
+}
+
+/* Mensaje de carrito vacío */
+.cartProducts p {
+    text-align: center;
+    font-size: 18px;
+    color: #6c757d;
+    padding: 20px 0;
 }

@@ -99,7 +99,7 @@ const buscadorContainer = document.querySelector("#buscadorContainer")
 
 
 const buscar = () => {
-  const filtrado = autos.filter(auto => auto.modelo.includes(buscador.value))
+  const filtrado = autos.filter(auto => auto.modelo.toLocaleLowerCase().includes(buscador.value.toLocaleLowerCase()))
   
   if (filtrado.length === 0) {
     section.innerHTML = `<p>No se han encontrado productos</p>`;
@@ -159,6 +159,15 @@ const mostrarCards = (a) => {
   section.innerHTML = cards.join("");
 }
 
-mostrarCards(autos)
 
 
+
+const promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("ok")
+  }, 3000)
+})
+
+promise.then(() => {
+  mostrarCards(autos)
+})
